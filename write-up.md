@@ -1,8 +1,9 @@
 # write-up
 
 * replace placeholder vars with your own values
-* don't forget to example.com with YOURDOMAIN.TLD
-to find all occurences you can use this, if you use the fish shell
+* don't forget to replace `example.com` with `YOURDOMAIN.TLD`
+
+to find all occurences you can use this, if you use the fish shell:
 ```
 for file in (find ./*/ -type f)
   grep -Hn example.com $file
@@ -19,6 +20,7 @@ systemctl stop dovecot; systemctl stop postfix; systemctl stop rspamd
 ```
 
 *setup a non-root user with a home dir*
+
 `su THAT_USER`
 
 ### certbot
@@ -33,7 +35,7 @@ sudo crontab -e
 sudo unbound-anchor -a /var/lib/unbound/root.key
 sudo sytemctl reload unbound
 sudo systemctl restart unbound
-sudo echo "nameserver 127.0.0.1" >> /etc/resolv.conf
+sudo echo "nameserver 127.0.0.1" > /etc/resolv.conf
 ```
 
 ### ufw
@@ -53,7 +55,7 @@ sudo ufw enable
 ```
 
 ### postfix, dovecot, rspamd
-> **DON'T** just copy the files! Some files only contain changes
+> **DON'T** just copy the files! some files only contain changes
 
 ### services
 ```
@@ -64,6 +66,7 @@ sudo systemctl reload postfix
 sudo postalias /etc/postfix/aliases
 sudo postfix check
 
+# in bash:
 services=("postfix" "dovecot" "redis-server" "rspamd" "unbound" "ufw")
 for srv in "${services[@]}"; do sudo systemctl enable "$srv" ; sudo systemctl start "$srv"; done
 ```

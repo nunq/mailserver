@@ -1,0 +1,4 @@
+# rspamd /etc/rspamd/local.d/dns.inc
+dns {
+    nameserver = ["127.0.0.1:53:10"];
+}

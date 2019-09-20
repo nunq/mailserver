@@ -1,0 +1,76 @@
+# postfix /etc/postfix/main.cf
+# main / misc
+biff = no
+mailbox_transport = lmtp:unix:private/dovecot-lmtp
+home_mailbox = Maildir/
+mailbox_size_limit = 0
+recipient_delimiter = +
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+append_dot_mydomain = no
+delay_warning_time = 4h
+readme_directory = no
+compatibility_level = 2
+
+# postscreen
+postscreen_dnsbl_threshold = 2
+postscreen_dnsbl_sites = ix.dnsbl.manitu.net*2, zen.spamhaus.org*2
+postscreen_dnsbl_action = drop
+postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/postscreen_access
+postscreen_blacklist_action = drop
+
+# mua_*_restrictions
+mua_relay_restrictions = reject_unknown_recipient_domain, permit_mynetworks, permit_sasl_authenticated, reject
+mua_sender_restrictions = permit_mynetworks, reject_non_fqdn_sender, permit_sasl_authenticated, reject
+mua_client_restrictions = permit_mynetworks, permit_sasl_authenticated, reject
+
+# smtpd_*_restrictions
+smtpd_helo_required = yes
+smtpd_helo_restrictions = permit_mynetworks, reject_invalid_helo_hostname, reject_unknown_helo_hostname, reject_non_fqdn_helo_hostname
+smtpd_data_restrictions = reject_unauth_pipelining
+smtpd_client_restrictions = permit_mynetworks, reject_unknown_client_hostname
+smtpd_relay_restrictions = reject_non_fqdn_recipient, reject_unknown_recipient_domain, permit_mynetworks, reject_unauth_destination
+
+# dovecot
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+
+# rspamd
+smtpd_milters = inet:localhost:11332
+non_smtpd_milters = inet:localhost:11332
+milter_protocol = 6
+milter_mail_macros =  i {mail_addr} {client_addr} {client_name} {auth_authen}
+milter_default_action = accept
+
+# smtp tls
+smtp_tls_security_level = may
+smtp_dns_support_level = enabled
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtp_tls_protocols = !SSLv2, !SSLv3
+smtp_tls_ciphers = high
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+
+# smtpd tls
+smtpd_use_tls=yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_tls_auth_only = yes
+smtpd_tls_security_level = may
+smtpd_tls_protocols = !SSLv2, !SSLv3
+smtpd_tls_ciphers = high
+smtpd_tls_cert_file=/etc/letsencrypt/live/mail.example.com/fullchain.pem
+smtpd_tls_key_file=/etc/letsencrypt/live/mail.example.com/privkey.pem
+tls_preempt_cipherlist = yes
+tls_ssl_options = NO_COMPRESSION
+tls_high_cipherlist = EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA256:EECDH:+CAMELLIA128:+AES128:+SSLv3:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!DSS:!RC4:!SEED:!IDEA:!ECDSA:kEDH:CAMELLIA128-SHA:AES128-SHA
+
+# domain and ip
+myhostname = mail.example.com
+mydomain = example.com
+masquerade_domains = $mydomain
+myorigin = /etc/mailname
+mydestination = $myhostname, $mydomain, localhost.localdomain, localhost
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+inet_interfaces = all
+inet_protocols = all
+

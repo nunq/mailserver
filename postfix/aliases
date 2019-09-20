@@ -1,0 +1,3 @@
+# /etc/postfix/aliases
+root: username
+postmaster: username

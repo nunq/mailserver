@@ -1,0 +1,5 @@
+# postfix /etc/postfix/submission_header_cleanup
+/^Received:/            IGNORE
+/^X-Originating-IP:/    IGNORE
+/^X-Mailer:/            IGNORE
+/^User-Agent:/          IGNORE

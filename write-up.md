@@ -21,7 +21,10 @@ systemctl stop dovecot; systemctl stop postfix; systemctl stop rspamd
 
 *setup a non-root user with a home dir*
 
-`su THAT_USER`
+example:
+`useradd -m -G sudo -s /bin/bash USERNAME && echo "export EDITOR=vim" >> /home/USERNAME/.bashrc
+
+`su USERNAME`
 
 ### certbot
 ```

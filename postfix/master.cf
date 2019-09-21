@@ -9,9 +9,10 @@ smtp      inet  n       -       y       -       1       postscreen -o smtpd_sasl
 smtpd     pass  -       -       y       -       -       smtpd
 dnsblog   unix  -       -       y       -       0       dnsblog
 tlsproxy  unix  -       -       y       -       0       tlsproxy
-submissions inet n       -       y       -       -       smtpd
-  -o syslog_name=postfix/submission
+smtps inet n       -       y       -       -       smtpd
+  -o syslog_name=postfix/smtps
   -o smtpd_tls_security_level=encrypt
+  -o smtpd_tls_wrappermode=yes
   -o smtpd_sasl_auth_enable=yes
   -o smtpd_sasl_type=dovecot
   -o smtpd_sasl_path=private/auth

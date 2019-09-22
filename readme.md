@@ -18,6 +18,9 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 * https://wiki.archlinux.org/index.php/Postfix
 
 ## other
+
+**no guarantees that any of this will work**
+
 * i mainly wrote this for myself
 * no explanation for why an option is configured that way is provided, ever
 
@@ -25,5 +28,3 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 the folder needs to be accessible to `$SSH_USER` for this to work. since mail users are just regular users on the system (and authenticated with pam), you may need to `rsync` each user's `~/Maildir` to a directory which is accessible by `$SSH_USER`.
 
 `rsync -e 'ssh -p $PORT' -avzud --delete $SSH_USER@$IP:/path/to/accessible/Maildir/ ~/Documents/backups/mailbackup/`
-
-**no guarantees that this will work**

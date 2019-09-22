@@ -20,3 +20,5 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 ## other
 * i mainly wrote this for myself
 * no explanation for why an option is configured that way is provided, ever
+
+**no guarantees that this will work**

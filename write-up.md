@@ -22,7 +22,7 @@ systemctl stop dovecot; systemctl stop postfix; systemctl stop rspamd
 *setup a non-root user with a home dir*
 
 example:
-`useradd -m -G sudo -s /bin/bash USERNAME && echo "export EDITOR=vim" >> /home/USERNAME/.bashrc
+`useradd -m -G sudo -s /bin/bash USERNAME && echo "export EDITOR=vim" >> /home/USERNAME/.bashrc`
 
 `su USERNAME`
 

@@ -22,7 +22,7 @@ systemctl stop dovecot; systemctl stop postfix; systemctl stop rspamd
 *setup a non-root user with a home dir*
 
 example:
-`useradd -m -G sudo -s /bin/bash USERNAME && echo "export EDITOR=vim" >> /home/USERNAME/.bashrc`
+`useradd -m -G sudo -s /bin/bash USERNAME && echo "export EDITOR=nvim" >> /home/USERNAME/.bashrc`
 
 `su USERNAME`
 
@@ -59,6 +59,19 @@ sudo ufw enable
 
 ### postfix, dovecot, rspamd
 > **DON'T** just copy the files! some files only contain changes
+
+#### dkim key
+* we use rspamd's dkim-signing module to sign our mail, for that we need a key
+
+```
+# store it somewhere
+mkdir -p /etc/mail/dkim
+# generate a 1024 bit key (it's only 1024 bits, cuz else the pubkey armor data would be too long for dns records)
+openssl genrsa -out /etc/mail/dkim/example.com.key 1024
+# rspamd needs to be able to access the file (for dkim signing) so set the permissions right
+```
+
+* you need to put the pubkey armor data into your dkim dns record (see `dns-setup.md`)
 
 ### services
 ```

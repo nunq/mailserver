@@ -1,5 +1,6 @@
 # dns records
-replace all instances of `example.com` with your domain.
+* replace all instances of `example.com` with your domain.
+* you also need to set up reverse DNS (to your mail fqdn)
 
 ### letsencrypt
 `example.com. A $IP`

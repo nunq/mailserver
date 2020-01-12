@@ -1,7 +1,8 @@
 #!/bin/bash
 set -x
 logfile="./monitor.log"
-DOMAIN="example.com"
+DOMAIN=""
+IP=""
 MAILDOMAIN="mail.""$DOMAIN"
 APICALL=""
 # check working inet for this machine
@@ -18,13 +19,11 @@ notify() {
   exit 0
 }
 # actual monitoring
-ping -q -4 -w 2 -c 2 "$DOMAIN" || notify "couldn't%20ping%20domain%20name"
+ping -q -4 -w 3 -c 2 "$IP" || notify "server%20is%20down%20%28couldn%27t%20ping%20IP%29"
+ping -q -4 -w 3 -c 2 "$DOMAIN" || notify "couldn%27t%20ping%20domain%20name"
 # port 25
-nc -w 4 "$MAILDOMAIN" 25 || notify "port%2025%20on%20"$MAILDOMAIN"%20is%20dead"
-nc -w 4 "$DOMAIN" 25 || notify "port%2025%20on%20"$DOMAIN"%20is%20dead"
+nc -w 5 "$MAILDOMAIN" 25 || notify "port%2025%20on%20"$MAILDOMAIN"%20is%20dead"
 # port 465
 nc -w 5 "$MAILDOMAIN" 465 || notify "port%20465%20on%20"$MAILDOMAIN"%20is%20dead"
-nc -w 5 "$DOMAIN" 465 || notify "port%20465%20on%20"$DOMAIN"%20is%20dead"
 # port 993
 nc -w 5 "$MAILDOMAIN" 993 || notify "port%20993%20on%20"$MAILDOMAIN"%20is%20dead"
-nc -w 5 "$DOMAIN" 993 || notify "port%20993%20on%20"$DOMAIN"%20is%20dead"

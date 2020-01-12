@@ -16,6 +16,15 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 * https://rspamd.com/doc/configuration/
 * https://wiki.archlinux.org/index.php/Mail_server
 * https://wiki.archlinux.org/index.php/Postfix
+* https://poolp.org/posts/2019-09-14/setting-up-a-mail-server-with-opensmtpd-dovecot-and-rspamd/
+
+### useful tools
+* https://www.dmarcanalyzer.com/dkim/dkim-check/
+* https://mxtoolbox.com/
+* https://ssl-tools.net/mailservers
+* https://ssl-tools.net/mails
+* https://www.checktls.com/index.html
+* https://www.whatsmydns.net/
 
 ## other
 

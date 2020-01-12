@@ -1,7 +1,0 @@
-# /etc/postfix/aliases
-root: admin-account
-postmaster: admin-account
-security: admin-account
-abuse: admin-account
-webmaster: admin-account
-admtmp: admin-account

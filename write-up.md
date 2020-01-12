@@ -60,6 +60,15 @@ sudo ufw enable
 ### postfix, dovecot, rspamd
 > **DON'T** just copy the files! some files only contain changes
 
+#### postfix aliases
+```
+# edit the alias file
+# map them
+sudo postmap /etc/postfix/virtual
+# restart postfix
+sudo postfix reload
+```
+
 #### dkim key
 * we use rspamd's dkim-signing module to sign our mail, for that we need a key
 

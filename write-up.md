@@ -31,7 +31,12 @@ example:
 certbot certonly --standalone -d mail.example.com
 sudo crontab -e
 @weekly certbot renew --renew-hook "systemctl reload dovecot; systemctl reload postfix" -q
+
+# to use 4096 bit RSA keys, add
+rsa_key_size = 4096
+# in /etc/letsencrypt/renewal/mail.example.com.conf
 ```
+
 
 ### unbound
 ```
@@ -68,6 +73,15 @@ sudo postmap /etc/postfix/virtual
 # restart postfix
 sudo postfix reload
 ```
+
+#### postfix dh params
+```
+mkdir /etc/postfix/dhparam/
+# make sure you have enough entropy
+openssl dhparam -out /etc/postfix/dhparam/postfix-dh-4096.pem -2 4096
+openssl dhparam -out /etc/postfix/dhparam/postfix-dh-512.pem -2 4096
+```
+
 
 #### dkim key
 * we use rspamd's dkim-signing module to sign our mail, for that we need a key

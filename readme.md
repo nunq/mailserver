@@ -17,6 +17,7 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 * https://wiki.archlinux.org/index.php/Mail_server
 * https://wiki.archlinux.org/index.php/Postfix
 * https://poolp.org/posts/2019-09-14/setting-up-a-mail-server-with-opensmtpd-dovecot-and-rspamd/
+* https://mecsa.jrc.ec.europa.eu/en/postfix
 
 ### useful tools
 * https://www.dmarcanalyzer.com/dkim/dkim-check/
@@ -25,6 +26,9 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 * https://ssl-tools.net/mails
 * https://www.checktls.com/index.html
 * https://www.whatsmydns.net/
+* https://mecsa.jrc.ec.europa.eu/
+* https://en.internet.nl/mail/
+* https://tls.imirhil.fr/tls/
 
 ## other
 
@@ -32,6 +36,11 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 
 * i mainly wrote this for myself
 * no explanation for why an option is configured that way is provided, ever
+
+### todo
+* MTA-STS
+* DNSSEC
+* DANE
 
 ### backing up your Maildir
 the folder needs to be accessible to `$SSH_USER` for this to work. since mail users are just regular users on the system (and authenticated with pam), you may need to `rsync` each user's `~/Maildir` to a directory which is accessible by `$SSH_USER`.

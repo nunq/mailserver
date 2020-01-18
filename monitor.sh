@@ -24,6 +24,6 @@ ping -q -4 -w 3 -c 2 "$DOMAIN" || notify "couldn%27t%20ping%20domain%20name"
 # port 25
 nc -w 5 "$MAILDOMAIN" 25 || notify "port%2025%20on%20"$MAILDOMAIN"%20is%20dead"
 # port 465
-nc -w 5 "$MAILDOMAIN" 465 || notify "port%20465%20on%20"$MAILDOMAIN"%20is%20dead"
+timeout 5s openssl s_client -connect "$MAILDOMAIN"":465" || notify "port%20465%20on%20"$MAILDOMAIN"%20is%20dead"
 # port 993
-nc -w 5 "$MAILDOMAIN" 993 || notify "port%20993%20on%20"$MAILDOMAIN"%20is%20dead"
+timeout 5s openssl s_client -connect "$MAILDOMAIN"":993" || notify "port%20993%20on%20"$MAILDOMAIN"%20is%20dead"

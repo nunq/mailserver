@@ -65,7 +65,7 @@ smtpd_tls_eecdh_grade = ultra
 smtpd_tls_key_file=/etc/letsencrypt/live/mail.example.com/privkey.pem
 smtpd_tls_mandatory_ciphers = high
 smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
-smtpd_tls_security_level = may
+smtpd_tls_security_level = encrypt
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtpd_use_tls = yes
 

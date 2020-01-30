@@ -54,6 +54,7 @@ smtp_tls_mandatory_protocols !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
 smtp_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
 smtp_tls_security_level = may
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtp_tls_loglevel = 1
 
 # smtpd tls
 smtpd_tls_auth_only = yes
@@ -68,6 +69,7 @@ smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
 smtpd_tls_security_level = encrypt
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtpd_use_tls = yes
+smtpd_tls_loglevel = 1
 
 # misc tls
 lmtp_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1

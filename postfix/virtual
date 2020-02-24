@@ -5,6 +5,3 @@ abuse@example.com      admin-account
 webmaster@example.com  admin-account
 admtmp@example.com     admin-account
 admin@example.com      admin-account
- 
-# catch all
-#@example.com      catch-all-account

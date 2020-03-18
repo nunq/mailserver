@@ -109,3 +109,13 @@ sudo postfix check
 services=("postfix" "dovecot" "redis-server" "rspamd" "unbound" "ufw")
 for srv in "${services[@]}"; do sudo systemctl enable "$srv" ; sudo systemctl start "$srv"; done
 ```
+
+### misc
+
+#### add a new mail user
+
+```
+sudo useradd -m -s /bin/bash USERNAME
+sudo passwd USERNAME
+# restart all the services
+```

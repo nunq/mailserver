@@ -1,6 +1,6 @@
 # if you want comments/default values, open the default file shipped with this package.
 # main / misc
-alias_maps = hash:/etc/aliases # isn't used, but prevents some errors in the log
+alias_maps = hash:/etc/aliases
 append_dot_mydomain = no
 biff = no
 compatibility_level = 2

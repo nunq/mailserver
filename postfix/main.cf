@@ -1,4 +1,4 @@
-# postfix /etc/postfix/main.cf
+# if you want comments/default values, open the default file shipped with this package.
 # main / misc
 alias_maps = hash:/etc/aliases # isn't used, but prevents some errors in the log
 append_dot_mydomain = no
@@ -7,11 +7,13 @@ compatibility_level = 2
 delay_warning_time = 4h
 home_mailbox = Maildir/
 mailbox_size_limit = 0
-message_size_limit = 100000000 # 100mb
+message_size_limit = 100000000
 mailbox_transport = lmtp:unix:private/dovecot-lmtp
 readme_directory = no
 recipient_delimiter = +
 virtual_alias_maps = hash:/etc/postfix/virtual
+disable_vrfy_command = yes
+smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
 
 # postscreen
 postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/postscreen_access
@@ -51,8 +53,9 @@ smtp_tls_cert_file=/etc/letsencrypt/live/mail.example.com/fullchain.pem
 smtp_tls_ciphers = high
 smtp_tls_key_file=/etc/letsencrypt/live/mail.example.com/privkey.pem
 smtp_tls_mandatory_ciphers = high
-smtp_tls_mandatory_protocols !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
-smtp_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
+
+smtp_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1
+smtp_tls_protocols = !SSLv2, !SSLv3, !TLSv1
 smtp_tls_security_level = may
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtp_tls_loglevel = 1
@@ -64,10 +67,12 @@ smtpd_tls_ciphers = high
 smtpd_tls_dh1024_param_file = /etc/postfix/dhparam/postfix-dh-4096.pem
 smtpd_tls_dh512_param_file = /etc/postfix/dhparam/postfix-dh-512.pem
 smtpd_tls_eecdh_grade = ultra
+smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1
 smtpd_tls_key_file=/etc/letsencrypt/live/mail.example.com/privkey.pem
 smtpd_tls_mandatory_ciphers = high
-smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
-smtpd_tls_security_level = encrypt
+tls_preempt_cipherlist = yes
+smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1
+smtpd_tls_security_level = may
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtpd_use_tls = yes
 smtpd_tls_loglevel = 1
@@ -81,7 +86,7 @@ tls_ssl_options = NO_COMPRESSION, NO_RENEGOTIATION, PRIORITIZE_CHACHA
 # domain and ip
 inet_interfaces = all
 inet_protocols = all
-masquerade_domains = $mydomain # i.e. show as 'from example.com' instead of 'from mail.example.com'
+masquerade_domains = example.com
 mydestination = $myhostname, $mydomain, localhost.localdomain, localhost
 mydomain = example.com
 myhostname = mail.example.com

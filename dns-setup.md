@@ -2,11 +2,13 @@
 * replace all instances of `example.com` with your domain.
 * you also need to set up reverse DNS (to your mail fqdn)
 
-### letsencrypt
+### the domain itself
 `example.com. A $IP`
 `example.com. AAAA $IP6`
 
 ### mx
+> lookup 'dns mx priority'
+
 `example.com. MX mail.example.com $prio`
 
 ### mail subdomain
@@ -30,3 +32,5 @@ to get the pubkey armor data, use `openssl rsa -in FILE -pubout -out -`
 * `pct=100` => all emails are subject to this policy
 
 `_dmarc.example.com. TXT "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@example.com;"`
+
+recommended: free dmarc monitoring with https://dmarc.postmarkapp.com/

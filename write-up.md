@@ -27,6 +27,8 @@ example:
 `su USERNAME`
 
 ### certbot
+> get a tls cert for your domain
+
 ```
 certbot certonly --standalone -d mail.example.com
 sudo crontab -e
@@ -37,8 +39,9 @@ rsa_key_size = 4096
 # in /etc/letsencrypt/renewal/mail.example.com.conf
 ```
 
-
 ### unbound
+> local dns resolver
+
 ```
 sudo unbound-anchor -a /var/lib/unbound/root.key
 sudo sytemctl reload unbound
@@ -47,6 +50,8 @@ sudo echo "nameserver 127.0.0.1" > /etc/resolv.conf
 ```
 
 ### ufw
+> simple firewall
+
 `sudo ufw default deny`
 
 ⚠️⚠️⚠️`sudo ufw allow YOUR_SSH_PORT` ⚠️⚠️⚠️
@@ -63,9 +68,11 @@ sudo ufw enable
 ```
 
 ### postfix, dovecot, rspamd
-> **DON'T** just copy the files! some files only contain changes
+> just copying the files _should_ be fine. no guarantees or promises though!!
 
 #### postfix aliases
+> also known as mail aliases
+
 ```
 # edit the alias file
 # map them
@@ -75,13 +82,14 @@ sudo postfix reload
 ```
 
 #### postfix dh params
+> regenerate with bigger sizes for increased security
+
 ```
 mkdir /etc/postfix/dhparam/
 # make sure you have enough entropy
 openssl dhparam -out /etc/postfix/dhparam/postfix-dh-4096.pem -2 4096
 openssl dhparam -out /etc/postfix/dhparam/postfix-dh-512.pem -2 4096
 ```
-
 
 #### dkim key
 * we use rspamd's dkim-signing module to sign our mail, for that we need a key
@@ -113,9 +121,14 @@ for srv in "${services[@]}"; do sudo systemctl enable "$srv" ; sudo systemctl st
 ### misc
 
 #### add a new mail user
+> for sending mail as user@domain.tld . mail aliases can only receive mail.
 
 ```
 sudo useradd -m -s /bin/bash USERNAME
 sudo passwd USERNAME
 # restart all the services
 ```
+
+#### uptime monitoring
+
+https://uptimerobot.com/

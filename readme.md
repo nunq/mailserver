@@ -6,7 +6,6 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 * a clean, updated debian install
 * a non-root user
 * dns records setup as described in dns-setup.md
-* a letsencrypt cert for `mail.YOURDOMAIN.TLD` in `/etc/letsencrypt/live/mail.YOURDOMAIN.TLD/`
 * replace `example.com` in the config files with your `domain.tld`
 * read write-up.md so you actually _kind of_ know what you're doing.
 

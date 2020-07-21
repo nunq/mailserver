@@ -3,6 +3,9 @@
 * you also need to set up reverse DNS (to your mail fqdn)
 
 ### the domain itself
+
+> this is for having all the stuff on one machine (domain as well as `mail.` subdomain)
+
 `example.com. A $IP`
 `example.com. AAAA $IP6`
 
@@ -14,6 +17,9 @@
 ### mail subdomain
 `mail.example.com. A $IP`
 `mail.example.com. AAAA $IP6`
+
+### ptr record (rdns)
+set the ip of your server to your mail fqdn.
 
 ### spf
 `example.com. TXT "v=spf1 mx -all"`

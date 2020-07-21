@@ -32,7 +32,7 @@ example:
 ```
 certbot certonly --standalone -d mail.example.com
 sudo crontab -e
-@weekly certbot renew --renew-hook "systemctl reload dovecot; systemctl reload postfix" -q
+@monthly certbot renew --renew-hook --force-renewal "systemctl reload dovecot; systemctl reload postfix; systemctl reload rspamd" -q
 
 # to use 4096 bit RSA keys, add
 rsa_key_size = 4096

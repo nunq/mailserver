@@ -26,6 +26,7 @@ notes on setting up a mailserver on debian using postfix, dovecot and rspamd (+ 
 * https://www.checktls.com/index.html
 * https://www.whatsmydns.net/
 * https://mecsa.jrc.ec.europa.eu/
+* https://www.emailsecuritygrader.com/
 * https://en.internet.nl/mail/
 * https://tls.imirhil.fr/tls/
 

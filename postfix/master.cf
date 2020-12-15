@@ -63,3 +63,4 @@ scalemail-backend unix	-	n	n	-	2	pipe
 mailman   unix  -       n       n       -       -       pipe
   flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
   ${nexthop} ${user}
+policy-spf unix - n n - - spawn user=nobody argv=/usr/sbin/postfix-policyd-spf-perl

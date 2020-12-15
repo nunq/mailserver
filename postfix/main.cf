@@ -14,6 +14,8 @@ recipient_delimiter = +
 virtual_alias_maps = hash:/etc/postfix/virtual
 disable_vrfy_command = yes
 smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+policy-spf_time_limit = 3600s
+smtpd_helo_required = yes
 
 # postscreen
 postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/postscreen_access
@@ -29,10 +31,10 @@ mua_sender_restrictions = permit_mynetworks, reject_non_fqdn_sender, permit_sasl
 
 # smtpd_*_restrictions
 smtpd_client_restrictions = permit_mynetworks, reject_unknown_client_hostname
-smtpd_data_restrictions = reject_unauth_pipelining
-smtpd_helo_required = yes
 smtpd_helo_restrictions = permit_mynetworks, reject_invalid_helo_hostname, reject_unknown_helo_hostname, reject_non_fqdn_helo_hostname
 smtpd_relay_restrictions = reject_non_fqdn_recipient, reject_unknown_recipient_domain, permit_mynetworks, reject_unauth_destination
+smtpd_data_restrictions = reject_unauth_pipelining
+smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination, check_policy_service unix:private/policy-spf
 
 # dovecot
 smtpd_sasl_auth_enable = yes

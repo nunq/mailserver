@@ -14,7 +14,7 @@ as root:
 ```
 apt update && sudo apt -y upgrade
 
-apt -y install dovecot-core dovecot-imapd dovecot-lmtpd postfix rspamd redis certbot ufw tmux unbound neovim bash-completion sudo && apt update && apt -y autoremove
+apt -y install dovecot-core dovecot-imapd dovecot-lmtpd postfix rspamd redis certbot ufw tmux unbound neovim bash-completion postfix-policyd-spf-perl && sudo apt update && apt -y autoremove
 
 systemctl stop dovecot; systemctl stop postfix; systemctl stop rspamd
 ```
